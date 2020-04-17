@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 
-import os
 import platform
 import asyncio
 
 PORT_ECHO_UDP = 4001
 PORT_ECHO_TCP = 5001
-PORT_HTTP = 80
 INADDR_ANY = "0.0.0.0"
 
 SERVER_NAME = platform.node()
@@ -40,7 +38,7 @@ async def main():
     loop = asyncio.get_running_loop()
 
     print(f"Starting UDP server on port {PORT_ECHO_UDP}")
-    transport, protocol = await loop.create_datagram_endpoint(
+    await loop.create_datagram_endpoint(
         lambda: UdpEchoServer(),
         local_addr=(INADDR_ANY, PORT_ECHO_UDP))
 
